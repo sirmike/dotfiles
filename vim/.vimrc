@@ -76,4 +76,4 @@ nmap <Leader>s :call RunNearestSpec()<CR>
 nmap <Leader>l :call RunLastSpec()<CR>
 nmap <Leader>a :call RunAllSpecs()<CR>
 
-nmap <Leader>v ysiw{i#cs'"
+nmap <Leader>v ysiw}i#cs'"
