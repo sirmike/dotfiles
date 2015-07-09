@@ -15,6 +15,10 @@ set splitbelow
 set splitright
 set hlsearch
 set backspace=indent,eol,start
+
+" Delete comment character when joining commented lines
+set formatoptions+=j
+
 behave mswin
 syntax on
 set background=dark
