@@ -16,6 +16,7 @@ set splitbelow
 set splitright
 set hlsearch
 set backspace=indent,eol,start
+set ttimeoutlen=10
 
 " Delete comment character when joining commented lines
 set formatoptions+=j
