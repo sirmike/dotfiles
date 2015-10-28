@@ -36,39 +36,63 @@ let g:rspec_command='call Send_to_Tmux("bin/rspec {spec}\n")'
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
 
-function FormatXmlFast()
-	:silent! %s/&lt;/</g
-	:silent! %s/&gt;/>/g
-	:silent! %s/&quot;/"/g
-	:silent! %s/&amp;amp;/\&/g
-	:silent! %s/&amp;/\&/g
-	:silent! %s/></>\r</g
-	:silent! %s/>[ ]*</></g
-	set filetype=xml
-	:normal gg=G
+function! FormatXmlFast()
+  :silent! %s/&lt;/</g
+  :silent! %s/&gt;/>/g
+  :silent! %s/&quot;/"/g
+  :silent! %s/&amp;amp;/\&/g
+  :silent! %s/&amp;/\&/g
+  :silent! %s/>[ ]*</></g
+  :silent! %s/></>\r</g
+  set filetype=xml
+  :normal gg=G
 endfunction
 
-function FormatXmlFromClipboard()
-	:normal "*p
-	:call FormatXmlFast()
-	set hidden
+function! FormatXmlFromClipboard()
+  :normal "*p
+  :call FormatXmlFast()
+endfunction
+
+function! FormatRubyHashFromClipboard()
+  :normal "*p
+  :silent! %!ruby_hash.rb
+endfunction
+
+function! FormatJsonFromClipboard()
+  :normal "*p
+  :silent! %!python -m json.tool
+  set filetype=json
 endfunction
 
 function! FormatJSON()
-	set filetype=json
-	:silent! %!python -m json.tool
+  set filetype=json
+  :silent! %!python -m json.tool
+endfunction
+
+function! ResetTSlimeVars()
+  execute "normal <Plug>SetTmuxVars"
+endfunction
+
+function! ResetTSlimePaneNumber()
+  let g:tslime['pane'] = input("pane number: ", "", "custom,Tmux_Pane_Numbers")
+endfunction
+
+function! SetRspecCommand()
+  let l:cmd = input("command: ")
+  let g:rspec_command='call Send_to_Tmux("' . l:cmd . ' {spec}\n")'
 endfunction
 
 nmap <F9> :call FormatXmlFast()<CR>
-nmap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR>
-nmap <F2> :NERDTreeToggle<CR>
+nmap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
 nmap <C-f> :Ag 
 nmap <Leader><Space> :Ag<CR>
 nmap <C-b> :CtrlPBuffer<CR>
+nnoremap <S-l> gt
+nnoremap <S-h> gT
 
 noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR><ESC>
+inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 
 nmap <Leader><Leader> :nohlsearch<CR>
 
@@ -78,3 +102,5 @@ nmap <Leader>l :call RunLastSpec()<CR>
 nmap <Leader>a :call RunAllSpecs()<CR>
 
 nmap <Leader>v ysiw}i#cs'"
+nmap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>rs :source $MYVIMRC<CR>
