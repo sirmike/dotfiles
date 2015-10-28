@@ -25,7 +25,6 @@ behave mswin
 syntax on
 set background=dark
 colorscheme solarized
-:cd ~/git
 let g:EasyMotion_leader_key = '<Leader>'
 set guifont=Monaco\ 12
 
