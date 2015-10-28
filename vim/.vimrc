@@ -8,6 +8,7 @@ set ruler
 set nobackup
 set number
 set numberwidth=3
+set mouse=a
 set ignorecase
 set smartcase
 set noswapfile
