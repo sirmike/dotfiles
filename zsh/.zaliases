@@ -1,0 +1,12 @@
+alias g='git'
+alias p='padrino'
+alias b='bundle'
+alias bl='bundle _1.7.3_'
+alias pstart='bundle exec padrino start'
+alias rstart='bundle exec rails s'
+alias sstart='bin/rails s'
+alias ll='ls -la'
+alias ctags="`brew --prefix`/bin/ctags"
+alias zconfig='vim ~/.zshrc'
+alias dp='bundle exec cap production deploy'
+alias da='bundle exec cap acceptance deploy'
