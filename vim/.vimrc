@@ -23,10 +23,9 @@ set formatoptions+=j
 
 behave mswin
 syntax on
-set background=dark
+set background=light
 colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
-set guifont=Monaco\ 12
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,app/assets/images/*
 let g:agprg="/usr/local/bin/ag --column"
