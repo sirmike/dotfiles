@@ -102,4 +102,5 @@ nmap <Leader>a :call RunAllSpecs()<CR>
 
 nmap <Leader>v ysiw}i#cs'"
 nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>q :cclose<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
