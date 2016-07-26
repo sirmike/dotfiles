@@ -24,7 +24,7 @@ set formatoptions+=j
 
 behave mswin
 syntax on
-set background=light
+set background=dark
 colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
 
@@ -138,4 +138,6 @@ nmap <Leader>v ysiw}i#cs'"
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
+nmap <Leader>tmux <Plug>SetTmuxVars
+nmap <Leader>m :make<CR>
 nmap <Leader>tmux <Plug>SetTmuxVars
