@@ -17,6 +17,7 @@ set splitright
 set hlsearch
 set backspace=indent,eol,start
 set ttimeoutlen=10
+set laststatus=2
 
 " Delete comment character when joining commented lines
 set formatoptions+=j
@@ -27,10 +28,11 @@ set background=light
 colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,app/assets/images/*
+set wildignore+=*.so,*.swp,*.zip,app/assets/images/*
+let g:ctrlp_custom_ignore='tmp\/.*'
 let g:agprg="/usr/local/bin/ag --column"
 let g:aghighlight=1
-let g:rspec_command='call Send_to_Tmux("bin/rspec {spec}\n")'
+let g:rspec_command='Dispatch bin/rspec {spec}'
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
@@ -59,17 +61,13 @@ endfunction
 
 function! FormatJsonFromClipboard()
   :normal "*p
-  :silent! %!python -m json.tool
+  :silent! %!python3 -m json.tool
   set filetype=json
 endfunction
 
 function! FormatJSON()
   set filetype=json
   :silent! %!python -m json.tool
-endfunction
-
-function! ResetTSlimeVars()
-  execute "normal <Plug>SetTmuxVars"
 endfunction
 
 function! ResetTSlimePaneNumber()
@@ -79,6 +77,40 @@ endfunction
 function! SetRspecCommand()
   let l:cmd = input("command: ")
   let g:rspec_command='call Send_to_Tmux("' . l:cmd . ' {spec}\n")'
+endfunction
+
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+function! DispatchLastSpecsInSeparateWindow()
+  let old_rspec_command = g:rspec_command
+  let g:rspec_command='Start bin/rspec {spec}'
+  call RunLastSpec()
+  let g:rspec_command = old_rspec_command
 endfunction
 
 nmap <F9> :call FormatXmlFast()<CR>
@@ -98,9 +130,12 @@ nmap <Leader><Leader> :nohlsearch<CR>
 nmap <Leader>f :call RunCurrentSpecFile()<CR>
 nmap <Leader>s :call RunNearestSpec()<CR>
 nmap <Leader>l :call RunLastSpec()<CR>
+nmap <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
 nmap <Leader>a :call RunAllSpecs()<CR>
+nmap <Leader>c :Start bin/rails c<CR>
 
 nmap <Leader>v ysiw}i#cs'"
 nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>q :cclose<CR>
+nmap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
+nmap <Leader>tmux <Plug>SetTmuxVars
