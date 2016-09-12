@@ -29,7 +29,9 @@ colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
 
 set wildignore+=*.so,*.swp,*.zip,app/assets/images/*
-let g:ctrlp_custom_ignore='tmp\/.*'
+let g:ctrlp_custom_ignore={
+      \ 'dir': 'public\/assets$'
+      \}
 let g:agprg="/usr/local/bin/ag --column"
 let g:aghighlight=1
 let g:rspec_command='Dispatch bin/rspec {spec}'
@@ -140,4 +142,3 @@ nmap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
 nmap <Leader>tmux <Plug>SetTmuxVars
 nmap <Leader>m :make<CR>
-nmap <Leader>tmux <Plug>SetTmuxVars
