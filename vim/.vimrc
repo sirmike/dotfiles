@@ -18,11 +18,12 @@ set hlsearch
 set backspace=indent,eol,start
 set ttimeoutlen=10
 set laststatus=2
+set listchars=trail:-
+set list
 
 " Delete comment character when joining commented lines
 set formatoptions+=j
 
-behave mswin
 syntax on
 set background=dark
 colorscheme solarized
@@ -142,3 +143,4 @@ nmap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
 nmap <Leader>tmux <Plug>SetTmuxVars
 nmap <Leader>m :make<CR>
+nmap <Leader>z :tabclose<CR>
