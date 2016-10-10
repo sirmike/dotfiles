@@ -144,3 +144,8 @@ nnoremap <Leader>rs :source $MYVIMRC<CR>
 nmap <Leader>tmux <Plug>SetTmuxVars
 nmap <Leader>m :make<CR>
 nmap <Leader>z :tabclose<CR>
+
+nmap <Leader>1 :.!python -m json.tool<CR>
+vmap <Leader>1 :!python -m json.tool<CR>
+nmap <Leader>2 :.!ruby_hash.rb<CR>
+vmap <Leader>2 :!ruby_hash.rb<CR>
