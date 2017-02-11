@@ -18,11 +18,8 @@ set hlsearch
 set backspace=indent,eol,start
 set ttimeoutlen=10
 set laststatus=2
-set listchars=trail:-
+set cmdheight=1
 set list
-
-" Delete comment character when joining commented lines
-set formatoptions+=j
 
 syntax on
 set background=dark
@@ -116,36 +113,37 @@ function! DispatchLastSpecsInSeparateWindow()
   let g:rspec_command = old_rspec_command
 endfunction
 
-nmap <F9> :call FormatXmlFast()<CR>
-nmap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
-nmap <C-f> :Ag 
-nmap <Leader><Space> :Ag<CR>
-nmap <C-b> :CtrlPBuffer<CR>
+nnoremap <F9> :call FormatXmlFast()<CR>
+nnoremap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
+nnoremap <C-f> :Ag 
+nnoremap <Leader><Space> :Ag<CR>
+nnoremap <C-b> :CtrlPBuffer<CR>
 nnoremap <S-l> gt
 nnoremap <S-h> gT
 
-noremap <silent> <C-S>          :update<CR>
+nnoremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR><ESC>
 inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
 
-nmap <Leader><Leader> :nohlsearch<CR>
+nnoremap <Leader><Leader> :nohlsearch<CR>
 
-nmap <Leader>f :call RunCurrentSpecFile()<CR>
-nmap <Leader>s :call RunNearestSpec()<CR>
-nmap <Leader>l :call RunLastSpec()<CR>
-nmap <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
-nmap <Leader>a :call RunAllSpecs()<CR>
-nmap <Leader>c :Start bin/rails c<CR>
+nnoremap <Leader>f :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+nnoremap <Leader>l :call RunLastSpec()<CR>
+nnoremap <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
+nnoremap <Leader>a :call RunAllSpecs()<CR>
+nnoremap <Leader>c :Start bin/rails c<CR>
 
-nmap <Leader>v ysiw}i#cs'"
-nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <Leader>v ysiw}i#cs'"
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>rs :source $MYVIMRC<CR>
-nmap <Leader>tmux <Plug>SetTmuxVars
-nmap <Leader>m :make<CR>
-nmap <Leader>z :tabclose<CR>
+nnoremap <Leader>tmux <Plug>SetTmuxVars
+nnoremap <Leader>m :Dispatch<CR>
+nnoremap <Leader>x :Start build/ptts<CR>
+nnoremap <Leader>z :tabclose<CR>
 
-nmap <Leader>1 :.!python -m json.tool<CR>
-vmap <Leader>1 :!python -m json.tool<CR>
-nmap <Leader>2 :.!ruby_hash.rb<CR>
-vmap <Leader>2 :!ruby_hash.rb<CR>
+nnoremap <Leader>1 :.!python -m json.tool<CR>
+vnoremap <Leader>1 :!python -m json.tool<CR>
+nnoremap <Leader>2 :.!ruby_hash.rb<CR>
+vnoremap <Leader>2 :!ruby_hash.rb<CR>
