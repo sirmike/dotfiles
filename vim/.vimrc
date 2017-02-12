@@ -61,22 +61,13 @@ endfunction
 
 function! FormatJsonFromClipboard()
   :normal "*p
-  :silent! %!python3 -m json.tool
+  :silent! %!python -m json.tool
   set filetype=json
 endfunction
 
 function! FormatJSON()
   set filetype=json
   :silent! %!python -m json.tool
-endfunction
-
-function! ResetTSlimePaneNumber()
-  let g:tslime['pane'] = input("pane number: ", "", "custom,Tmux_Pane_Numbers")
-endfunction
-
-function! SetRspecCommand()
-  let l:cmd = input("command: ")
-  let g:rspec_command='call Send_to_Tmux("' . l:cmd . ' {spec}\n")'
 endfunction
 
 function! GetBufferList()
@@ -113,37 +104,59 @@ function! DispatchLastSpecsInSeparateWindow()
   let g:rspec_command = old_rspec_command
 endfunction
 
+" mappings to easily manage vimrc
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
+" global non-leader mappings
+inoremap jk <esc>
 nnoremap <F9> :call FormatXmlFast()<CR>
 nnoremap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
 nnoremap <C-f> :Ag 
-nnoremap <Leader><Space> :Ag<CR>
 nnoremap <C-b> :CtrlPBuffer<CR>
 nnoremap <S-l> gt
 nnoremap <S-h> gT
 
-nnoremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR><ESC>
-inoremap <silent> <C-S>         <C-O>:update<CR><ESC>
-
+" global leader mappings
 nnoremap <Leader><Leader> :nohlsearch<CR>
-
-nnoremap <Leader>f :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
-nnoremap <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
-nnoremap <Leader>a :call RunAllSpecs()<CR>
-nnoremap <Leader>c :Start bin/rails c<CR>
-
-nnoremap <Leader>v ysiw}i#cs'"
+nnoremap <Leader><Space> :Ag<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
-nnoremap <Leader>rs :source $MYVIMRC<CR>
-nnoremap <Leader>tmux <Plug>SetTmuxVars
-nnoremap <Leader>m :Dispatch<CR>
-nnoremap <Leader>x :Start build/ptts<CR>
 nnoremap <Leader>z :tabclose<CR>
 
-nnoremap <Leader>1 :.!python -m json.tool<CR>
-vnoremap <Leader>1 :!python -m json.tool<CR>
-nnoremap <Leader>2 :.!ruby_hash.rb<CR>
-vnoremap <Leader>2 :!ruby_hash.rb<CR>
+" Ctrl + S always saves
+nnoremap <silent> <C-S> :update<CR>
+vnoremap <silent> <C-S> <C-C>:update<CR><ESC>
+inoremap <silent> <C-S> <C-O>:update<CR><ESC>
+
+" ruby mappings
+function! SetRubyMappings()
+  nnoremap <buffer> <Leader>f :call RunCurrentSpecFile()<CR>
+  nnoremap <buffer> <Leader>s :call RunNearestSpec()<CR>
+  nnoremap <buffer> <Leader>l :call RunLastSpec()<CR>
+  nnoremap <buffer> <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
+  nnoremap <buffer> <Leader>a :call RunAllSpecs()<CR>
+  nnoremap <buffer> <Leader>c :Start bin/rails c<CR>
+  nnoremap <buffer> <Leader>v ysiw}i#cs'"
+  nnoremap <buffer> <Leader>1 :.!python -m json.tool<CR>
+  vnoremap <buffer> <Leader>1 :!python -m json.tool<CR>
+  nnoremap <buffer> <Leader>2 :.!ruby_hash.rb<CR>
+  vnoremap <buffer> <Leader>2 :!ruby_hash.rb<CR>
+endfunction
+
+augroup ruby_mappings
+  autocmd!
+  autocmd FileType ruby call SetRubyMappings()
+augroup end
+
+" cpp mappings
+function! SetCppMappings()
+  setlocal makeprg=ninja\ -C\ build<CR>
+  nnoremap <buffer> <Leader>m :Dispatch<CR>
+  nnoremap <buffer> <Leader>x :Start build/app<CR>
+endfunction
+
+augroup cpp_mappings
+  autocmd!
+  autocmd FileType cpp call SetCppMappings()
+augroup end
