@@ -26,9 +26,9 @@ set background=dark
 colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
 
-set wildignore+=*.so,*.swp,*.zip,app/assets/images/*
+set wildignore+=*.so,*.swp,*.zip,app/assets/images/*,tmp,log
 let g:ctrlp_custom_ignore={
-      \ 'dir': 'public\/assets$'
+      \ 'dir': 'tmp\|log|public\/assets$'
       \}
 let g:agprg="/usr/local/bin/ag --column"
 let g:aghighlight=1
