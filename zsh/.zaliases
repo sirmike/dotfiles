@@ -1,0 +1,12 @@
+alias g='git'
+alias p='padrino'
+alias b='bundle'
+alias pstart='bundle exec padrino start'
+alias rstart='bundle exec rails s'
+alias sstart='bin/rails s'
+alias ctags="`brew --prefix`/bin/ctags"
+alias zconfig='vim ~/.zshrc && . ~/.zshrc'
+alias dp='bundle exec cap production deploy'
+alias da='bundle exec cap acceptance deploy'
+alias mr='~/scripts/merge_request.sh'
+alias ns='netstat -an -p tcp -f inet'

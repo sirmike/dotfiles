@@ -6,7 +6,7 @@ export ZSH=/Users/SirMike/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="risto"
+ZSH_THEME="sirmike"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -50,7 +50,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git common-aliases vi-mode)
+plugins=(git common-aliases vi-mode colorize)
 
 # User configuration
 
@@ -81,22 +81,32 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias g='git'
-alias zconfig='vim ~/.zshrc && . ~/.zshrc'
-alias b='bundle'
-alias pstart='bundle exec padrino start'
-alias rstart='bundle exec rails server'
-alias vstart='bundle exec volt server'
 
-# chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 # turn off terminal suspension
 stty -ixon
 
+source $HOME/.zaliases
+
+to_json() {
+  underscore print --color -
+}
+
+to_xml() {
+  xmllint --format - | highlight --out-format=xterm256 --syntax=xml
+}
+
+bindkey "\e[3~" delete-char
+
 export KEYTIMEOUT=1
-LC_CTYPE=en_US.UTF-8
-LC_ALL=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# set history size
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.history
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
