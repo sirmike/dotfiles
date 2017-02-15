@@ -106,7 +106,7 @@ endfunction
 
 " mappings to easily manage vimrc
 nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
-nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>rv :source $MYVIMRC<CR>
 
 " global non-leader mappings
 inoremap jk <esc>
