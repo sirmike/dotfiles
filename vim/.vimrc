@@ -20,6 +20,7 @@ set ttimeoutlen=10
 set laststatus=2
 set cmdheight=1
 set list
+set diffopt+=vertical
 
 syntax on
 set background=dark
@@ -32,7 +33,12 @@ let g:ctrlp_custom_ignore={
       \}
 let g:agprg="/usr/local/bin/ag --column"
 let g:aghighlight=1
-let g:rspec_command='Dispatch bin/rspec {spec}'
+let g:rspec_command='Dispatch bundle exec rspec {spec}'
+
+let g:syntastic_rust_checkers = ['cargo']
+let g:syntastic_always_populate_loc_list = 1
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
@@ -122,7 +128,9 @@ nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader><Space> :Ag<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <Leader>l :lclose<CR>
 nnoremap <Leader>z :tabclose<CR>
+nmap <silent> <Leader>d <Plug>DashSearch
 
 " Ctrl + S always saves
 nnoremap <silent> <C-S> :update<CR>
@@ -137,6 +145,8 @@ function! SetRubyMappings()
   nnoremap <buffer> <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
   nnoremap <buffer> <Leader>a :call RunAllSpecs()<CR>
   nnoremap <buffer> <Leader>c :Start bin/rails c<CR>
+  nnoremap <buffer> <Leader>r :Dispatch bundle exec rubocop %<CR>
+  nnoremap <buffer> <Leader>ra :Dispatch bundle exec rubocop<CR>
   nnoremap <buffer> <Leader>v ysiw}i#cs'"
   nnoremap <buffer> <Leader>1 :.!python -m json.tool<CR>
   vnoremap <buffer> <Leader>1 :!python -m json.tool<CR>
