@@ -152,6 +152,7 @@ function! SetRubyMappings()
   vnoremap <buffer> <Leader>1 :!python -m json.tool<CR>
   nnoremap <buffer> <Leader>2 :.!ruby_hash.rb<CR>
   vnoremap <buffer> <Leader>2 :!ruby_hash.rb<CR>
+  set shiftwidth=2 tabstop=2 expandtab
 endfunction
 
 augroup ruby_mappings
