@@ -165,9 +165,23 @@ function! SetCppMappings()
   setlocal makeprg=ninja\ -C\ build<CR>
   nnoremap <buffer> <Leader>m :Dispatch<CR>
   nnoremap <buffer> <Leader>x :Start build/app<CR>
+  set shiftwidth=4 tabstop=4 expandtab
 endfunction
 
 augroup cpp_mappings
   autocmd!
   autocmd FileType cpp call SetCppMappings()
+augroup end
+
+" rust mappings
+function! SetRustMappings()
+  compiler cargo
+  nnoremap <buffer> <Leader>m :Make build<CR>
+  nnoremap <buffer> <Leader>x :Make run<CR>
+  set shiftwidth=2 tabstop=2 expandtab
+endfunction
+
+augroup rust_mappings
+  autocmd!
+  autocmd FileType rust call SetRustMappings()
 augroup end
