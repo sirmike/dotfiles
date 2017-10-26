@@ -176,6 +176,7 @@ function! SetRubyMappings()
   nnoremap <buffer> <Leader>2 :.!ruby_hash.rb<CR>
   vnoremap <buffer> <Leader>2 :!ruby_hash.rb<CR>
   set shiftwidth=2 tabstop=2 expandtab
+  nnoremap <buffer> <Leader>t :silent! !`ripper-tags -R`<CR> :redraw!<CR>
 endfunction
 
 augroup ruby_mappings
