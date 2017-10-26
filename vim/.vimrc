@@ -200,12 +200,13 @@ augroup end
 " rust mappings
 function! SetRustMappings()
   compiler cargo
-  nnoremap <buffer> <Leader>m :Make build<CR>
+  nnoremap <buffer> <Leader>m :Make check<CR>
   nnoremap <buffer> <Leader>x :Make run<CR>
+  nnoremap <buffer> <Leader>a :Make test<CR>
   set shiftwidth=2 tabstop=2 expandtab
 endfunction
 
 augroup rust_mappings
   autocmd!
-  autocmd FileType rust call SetRustMappings()
+  autocmd FileType rust,toml call SetRustMappings()
 augroup end
