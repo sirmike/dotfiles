@@ -55,13 +55,7 @@ set background=dark
 colorscheme solarized
 let g:EasyMotion_leader_key = '<Leader>'
 
-set wildignore+=*.so,*.swp,*.zip,app/assets/images/*,tmp,log
-let g:ctrlp_custom_ignore={
-      \ 'dir': 'tmp\|log|public\/assets$'
-      \}
-let g:agprg="/usr/local/bin/ag --column"
-let g:aghighlight=1
-let g:rspec_command='Dispatch bundle exec rspec {spec}'
+let g:rspec_command='Dispatch bin/rspec {spec}'
 
 let g:syntastic_rust_checkers = ['cargo']
 let g:syntastic_always_populate_loc_list = 1
@@ -147,7 +141,8 @@ inoremap jk <esc>
 nnoremap <F9> :call FormatXmlFast()<CR>
 nnoremap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
 nnoremap <C-f> :Ag 
-nnoremap <C-b> :CtrlPBuffer<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <S-l> gt
 nnoremap <S-h> gT
 
