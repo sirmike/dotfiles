@@ -1,4 +1,32 @@
-call pathogen#infect()
+call plug#begin('~/.vim/plugged')
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'w0rp/ale'
+  Plug 'rizzatti/dash.vim'
+  Plug 'rust-lang/rust.vim'
+  Plug 'wellle/targets.vim'
+  Plug 'jgdavey/tslime.vim'
+  Plug 'Quramy/tsuquyomi'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'kchmck/vim-coffee-script'
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-haml'
+  Plug 'elzr/vim-json'
+  Plug 'tpope/vim-repeat'
+  Plug 'thoughtbot/vim-rspec'
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-surround'
+  Plug 'nelstrom/vim-textobj-rubyblock'
+  Plug 'kana/vim-textobj-user'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'cespare/vim-toml'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-vinegar'
+call plug#end()
 
 runtime macros/matchit.vim
 
