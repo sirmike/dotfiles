@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'cespare/vim-toml'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-vinegar'
+  Plug 'jremmen/vim-ripgrep'
 call plug#end()
 
 runtime macros/matchit.vim
@@ -140,7 +141,7 @@ nnoremap <Leader>rv :source $MYVIMRC<CR>
 inoremap jk <esc>
 nnoremap <F9> :call FormatXmlFast()<CR>
 nnoremap <F3> :silent! !`/usr/local/bin/brew --prefix`/bin/ctags -R *<CR> :redraw!<CR>
-nnoremap <C-f> :Ag 
+nnoremap <C-f> :Rg 
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <S-l> gt
@@ -148,7 +149,7 @@ nnoremap <S-h> gT
 
 " global leader mappings
 nnoremap <Leader><Leader> :nohlsearch<CR>
-nnoremap <Leader><Space> :Ag<CR>
+nnoremap <Leader><Space> :Rg<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>l :lclose<CR>
