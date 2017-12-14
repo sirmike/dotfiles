@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-vinegar'
   Plug 'jremmen/vim-ripgrep'
+  Plug 'tpope/vim-obsession'
 call plug#end()
 
 runtime macros/matchit.vim
