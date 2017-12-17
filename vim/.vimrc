@@ -55,7 +55,6 @@ set diffopt+=vertical
 syntax on
 set background=dark
 colorscheme solarized
-let g:EasyMotion_leader_key = '<Leader>'
 
 let g:rspec_command='Dispatch bin/rspec {spec}'
 
