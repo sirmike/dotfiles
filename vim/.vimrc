@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-vinegar'
   Plug 'jremmen/vim-ripgrep'
   Plug 'tpope/vim-obsession'
+  Plug 'rhysd/vim-clang-format'
 call plug#end()
 
 runtime macros/matchit.vim
@@ -56,8 +57,12 @@ syntax on
 set background=dark
 colorscheme solarized
 
+" RSpec configuration
 let g:rspec_command='Dispatch bin/rspec {spec}'
 
+" ALE configuration
+let g:ale_fixers = { 'cpp': [ 'clang-format' ] }
+let g:ale_fix_on_save = 1
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
