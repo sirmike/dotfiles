@@ -110,7 +110,9 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.history
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
+# load fzf with configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+# load tmuxinator helpers
+source ~/.tmuxinator/tmuxinator.zsh
