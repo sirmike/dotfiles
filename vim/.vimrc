@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+  Plug 'OmniSharp/omnisharp-vim'
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
@@ -53,6 +54,10 @@ set cmdheight=1
 set list
 set diffopt+=vertical
 
+" Fix a bug with tmux-2.3 and vim-dispatch (note the trailing space)
+" https://github.com/tpope/vim-dispatch/issues/192
+set shellpipe=2>&1\|\ tee\ 
+
 syntax on
 set background=dark
 colorscheme solarized
@@ -62,7 +67,7 @@ let g:rspec_command='Dispatch bin/rspec {spec}'
 
 " ALE configuration
 let g:ale_fixers = { 'cpp': [ 'clang-format' ] }
-let g:ale_fix_on_save = 1
+let g:ale_linters = { 'cs': [ 'OmniSharp' ] }
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
@@ -211,4 +216,46 @@ endfunction
 augroup rust_mappings
   autocmd!
   autocmd FileType rust,toml call SetRustMappings()
+augroup end
+
+
+" OmniSharp configuration
+let g:OmniSharp_server_use_mono = 1
+
+" Timeout in seconds to wait for a response from the server
+let g:OmniSharp_timeout = 5
+
+" Don't autoselect first omnicomplete option, show options even if there is only
+" one (so the preview documentation is accessible). Remove 'preview' if you
+" don't want to see any documentation whatsoever.
+set completeopt=longest,menuone
+
+" Set desired preview window height for viewing documentation.
+" You might also want to look at the echodoc plugin.
+set previewheight=5
+let g:OmniSharp_selector_ui = 'fzf'    " Use fzf.vim
+
+function! SetCsharpMappings()
+  " The following commands are contextual, based on the cursor position.
+  nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+  nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+  nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+  nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+
+  " Finds members in the current buffer
+  nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+
+  nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+  nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+  nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
+  nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+  inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+  set shiftwidth=4 tabstop=4 expandtab
+endfunction
+
+augroup csharp_mappings
+  autocmd!
+  autocmd FileType cs call SetCsharpMappings()
+  autocmd BufNewFile,BufRead *.cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
+  autocmd BufNewFile,BufRead *.cs setlocal makeprg=dotnet\ build\ /property:GenerateFullPaths=true
 augroup end
