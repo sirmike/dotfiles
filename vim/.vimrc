@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jremmen/vim-ripgrep'
   Plug 'tpope/vim-obsession'
   Plug 'rhysd/vim-clang-format'
+  Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 runtime macros/matchit.vim
