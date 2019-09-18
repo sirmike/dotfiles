@@ -67,6 +67,9 @@ colorscheme solarized
 let g:rspec_command='Dispatch bin/rspec {spec}'
 
 " ALE configuration
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
 let g:ale_fixers = { 'cpp': [ 'clang-format' ] }
 let g:ale_linters = { 'cs': [ 'OmniSharp' ] }
 
