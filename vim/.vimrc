@@ -158,6 +158,7 @@ nnoremap <S-l> gt
 nnoremap <S-h> gT
 
 " global leader mappings
+map <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader><Space> :Rg<CR>
 nnoremap <Leader>gs :Gstatus<CR>
