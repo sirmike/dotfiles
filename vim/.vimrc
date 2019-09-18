@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
   Plug 'OmniSharp/omnisharp-vim'
-  Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
   Plug 'rizzatti/dash.vim'
@@ -53,6 +52,7 @@ set laststatus=2
 set cmdheight=1
 set list
 set diffopt+=vertical
+set clipboard=unnamed
 
 " Fix a bug with tmux-2.3 and vim-dispatch (note the trailing space)
 " https://github.com/tpope/vim-dispatch/issues/192
@@ -177,7 +177,7 @@ function! SetRubyMappings()
   nnoremap <buffer> <Leader>c :Start bin/rails c<CR>
   nnoremap <buffer> <Leader>r :Dispatch bundle exec rubocop %<CR>
   nnoremap <buffer> <Leader>ra :Dispatch bundle exec rubocop<CR>
-  nnoremap <buffer> <Leader>v ysiw}i#cs'"
+  nmap <buffer> <Leader>v ysiw}i#cs'"
   nnoremap <buffer> <Leader>1 :.!python -m json.tool<CR>
   vnoremap <buffer> <Leader>1 :!python -m json.tool<CR>
   nnoremap <buffer> <Leader>2 :.!ruby_hash.rb<CR>
