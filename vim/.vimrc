@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
   Plug 'OmniSharp/omnisharp-vim'
-  Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
   Plug 'rizzatti/dash.vim'
@@ -30,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jremmen/vim-ripgrep'
   Plug 'tpope/vim-obsession'
   Plug 'rhysd/vim-clang-format'
+  Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 runtime macros/matchit.vim
@@ -53,6 +53,7 @@ set laststatus=2
 set cmdheight=1
 set list
 set diffopt+=vertical
+set clipboard=unnamed
 
 " Fix a bug with tmux-2.3 and vim-dispatch (note the trailing space)
 " https://github.com/tpope/vim-dispatch/issues/192
@@ -69,6 +70,11 @@ let g:syntastic_rust_checkers = ['cargo']
 let g:syntastic_always_populate_loc_list = 1
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_fixers = { 'cpp': [ 'clang-format' ] }
+let g:ale_linters = { 'cs': [ 'OmniSharp' ] }
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
@@ -155,6 +161,7 @@ nnoremap <S-l> gt
 nnoremap <S-h> gT
 
 " global leader mappings
+map <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader><Leader> :nohlsearch<CR>
 nnoremap <Leader><Space> :Rg<CR>
 nnoremap <Leader>gs :Gstatus<CR>
@@ -178,7 +185,7 @@ function! SetRubyMappings()
   nnoremap <buffer> <Leader>c :Start bin/rails c<CR>
   nnoremap <buffer> <Leader>r :Dispatch bundle exec rubocop %<CR>
   nnoremap <buffer> <Leader>ra :Dispatch bundle exec rubocop<CR>
-  nnoremap <buffer> <Leader>v ysiw}i#cs'"
+  nmap <buffer> <Leader>v ysiw}i#cs'"
   nnoremap <buffer> <Leader>1 :.!python -m json.tool<CR>
   vnoremap <buffer> <Leader>1 :!python -m json.tool<CR>
   nnoremap <buffer> <Leader>2 :.!ruby_hash.rb<CR>
