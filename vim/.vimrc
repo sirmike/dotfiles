@@ -65,9 +65,10 @@ colorscheme solarized
 " RSpec configuration
 let g:rspec_command='Dispatch bin/rspec {spec}'
 
-" ALE configuration
-let g:ale_fixers = { 'cpp': [ 'clang-format' ] }
-let g:ale_linters = { 'cs': [ 'OmniSharp' ] }
+let g:syntastic_rust_checkers = ['cargo']
+let g:syntastic_always_populate_loc_list = 1
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
 filetype plugin indent on
 set shiftwidth=2 tabstop=2 expandtab
