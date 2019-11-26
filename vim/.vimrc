@@ -165,6 +165,7 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <Leader>l :lclose<CR>
 nnoremap <Leader>z :tabclose<CR>
+nnoremap <Leader>c :Tags<CR>
 nmap <silent> <Leader>d <Plug>DashSearch
 
 " Ctrl + S always saves
@@ -251,10 +252,11 @@ function! SetCsharpMappings()
   nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
 
   nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-  nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
   nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
   nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
   inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+  nnoremap <buffer> <Leader>m :Make<CR>
+  nnoremap <buffer> <Leader>t :Dispatch dotnet test Tests/Tests.csproj --filter <cword><CR>
   set shiftwidth=4 tabstop=4 expandtab
 endfunction
 
