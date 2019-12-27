@@ -3,33 +3,33 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
   Plug 'rizzatti/dash.vim'
-  Plug 'rust-lang/rust.vim'
   Plug 'wellle/targets.vim'
   Plug 'jgdavey/tslime.vim'
   Plug 'Quramy/tsuquyomi'
   Plug 'leafgarland/typescript-vim'
-  Plug 'kchmck/vim-coffee-script'
   Plug 'altercation/vim-colors-solarized'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-haml'
-  Plug 'elzr/vim-json'
+  Plug 'tpope/vim-dadbod'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-repeat'
-  Plug 'thoughtbot/vim-rspec'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-obsession'
+  Plug 'elzr/vim-json'
+  Plug 'thoughtbot/vim-rspec'
   Plug 'nelstrom/vim-textobj-rubyblock'
   Plug 'kana/vim-textobj-user'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'cespare/vim-toml'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-vinegar'
   Plug 'jremmen/vim-ripgrep'
-  Plug 'tpope/vim-obsession'
   Plug 'rhysd/vim-clang-format'
   Plug 'easymotion/vim-easymotion'
+  Plug 'sbdchd/neoformat'
 call plug#end()
 
 runtime macros/matchit.vim
@@ -66,7 +66,6 @@ colorscheme solarized
 " RSpec configuration
 let g:rspec_command='Dispatch bin/rspec {spec}'
 
-let g:syntastic_rust_checkers = ['cargo']
 let g:syntastic_always_populate_loc_list = 1
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
@@ -161,8 +160,7 @@ nnoremap <S-l> gt
 nnoremap <S-h> gT
 
 " global leader mappings
-map <Leader> <Plug>(easymotion-prefix)
-nnoremap <Leader><Leader> :nohlsearch<CR>
+nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader><Space> :Rg<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
@@ -170,6 +168,7 @@ nnoremap <Leader>l :lclose<CR>
 nnoremap <Leader>z :tabclose<CR>
 nnoremap <Leader>c :Tags<CR>
 nmap <silent> <Leader>d <Plug>DashSearch
+nnoremap <Leader>ff :Neoformat<CR>
 
 " Ctrl + S always saves
 nnoremap <silent> <C-S> :update<CR>
@@ -183,7 +182,6 @@ function! SetRubyMappings()
   nnoremap <buffer> <Leader>l :call RunLastSpec()<CR>
   nnoremap <buffer> <Leader>L :call DispatchLastSpecsInSeparateWindow()<CR>
   nnoremap <buffer> <Leader>a :call RunAllSpecs()<CR>
-  nnoremap <buffer> <Leader>c :Start bin/rails c<CR>
   nnoremap <buffer> <Leader>r :Dispatch bundle exec rubocop %<CR>
   nnoremap <buffer> <Leader>ra :Dispatch bundle exec rubocop<CR>
   nmap <buffer> <Leader>v ysiw}i#cs'"
@@ -255,11 +253,10 @@ function! SetCsharpMappings()
   nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
 
   nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+  nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
   nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
   nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
   inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-  nnoremap <buffer> <Leader>m :Make<CR>
-  nnoremap <buffer> <Leader>t :Dispatch dotnet test Tests/Tests.csproj --filter <cword><CR>
   set shiftwidth=4 tabstop=4 expandtab
 endfunction
 
