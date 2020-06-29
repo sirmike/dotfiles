@@ -6,7 +6,7 @@ export ZSH=/Users/SirMike/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="sirmike"
+ZSH_THEME="risto"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -50,7 +50,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git common-aliases vi-mode colorize)
+plugins=(git common-aliases vi-mode colorize git-flow-completions)
 
 # User configuration
 
@@ -82,12 +82,11 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# chruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
 # turn off terminal suspension
 stty -ixon
+
+# Ruby
+eval "$(rbenv init -)"
 
 source $HOME/.zaliases
 
@@ -104,6 +103,7 @@ bindkey "\e[3~" delete-char
 export KEYTIMEOUT=1
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # set history size
 HISTSIZE=1000

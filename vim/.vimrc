@@ -52,7 +52,6 @@ set ttimeoutlen=10
 set laststatus=2
 set cmdheight=1
 set list
-set diffopt+=vertical
 set clipboard=unnamed
 
 " Fix a bug with tmux-2.3 and vim-dispatch (note the trailing space)
@@ -159,7 +158,7 @@ nnoremap <S-h> gT
 
 " global leader mappings
 map <Leader> <Plug>(easymotion-prefix)
-nnoremap <Leader><Leader> :nohlsearch<CR>
+nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader><Space> :Rg<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>q :call ToggleList("Quickfix List", 'c')<CR>
